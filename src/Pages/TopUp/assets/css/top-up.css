@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
+
+
+:root {
+  --color-primary: #6379f4;
+  --color-secondary: #fafcff;
+  --color-dark: #3a3d42;
+  --color-white: #ffffff;
+  --color-danger: #ff5b37;
+}
+
+.txt-dark {
+  color: #3a3d42;
+}
+
+.txt-blue {
+  color: #6379f4;
+}
+
+.txt-white {
+  color: #ffffff;
+}
+
+.txt-red {
+  color: #ff5b37;
+}
+
+.bg-color-white {
+  background-color: #ffffff;
+}
+
+.bg-blue {
+  background-color: #6379f4;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif !important;
+  background: var(--color-secondary);
+}
+
+.nav-bar {
+  border-bottom-right-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+}
+
+#nav-content {
+  border-radius: 8px;
+}
+
+.nav-content>div>ul li.active::before {
+  content: "";
+  width: 3px;
+  height: 25px;
+  background: var(--color-primary);
+  left: -15px;
+  position: absolute;
+}
+
+.header-content {
+  border-radius: 8px;
+}
+
+.btn-bg-lg {
+  border-radius: 10px;
+  border: 1px solid var(--color-white);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 769px) {
+  .nav-mobile-l {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-l {
+    height: 35px;
+    width: 35px;
+  }
+
+  .mobile-l.bel {
+    height: 20px;
+    width: 20px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  #nav-content {
+    display: none;
+  }
+}
+
+.input-txt {
+  background: rgba(58, 61, 66, 0.1);
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  transition: ease-in-out 0.3s;
+}
+
+.input-container-bordered:hover>label .i-search,
+.input-container-bordered:focus-within>label .i-search {
+  background-image: url(/assets/images/icons/search-active.svg);
+  height: 24px;
+  width: 28px;
+  background-size: cover;
+  display: inline-block;
+}

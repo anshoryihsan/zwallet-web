@@ -1,0 +1,73 @@
+/* css login */
+/* body {
+  margin: 0 0;
+} */
+
+.txt-white {
+  color: #ffffff;
+}
+
+
+/* .container {
+  margin: 0px;
+  grid-template-columns: 500px 50px auto;
+} */
+
+.phone {
+  height: 28.125em;
+  position: relative;
+  left: -20px;
+}
+
+@media (max-width: 576px) {
+  .phone {
+    height: 40rem;
+    display: none;
+  }
+}
+
+.bg {
+  background: url(/assets/img/bg.svg);
+}
+
+.color-p {
+  color: white;
+}
+
+.txtpass {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  height: 39px;
+  width: 346px;
+  background: url(/assets/img/icon/lock.svg) no-repeat left center;
+  /* background-color: rgba(58, 61, 66, 0.1); */
+  color: var(--color-primary);
+  padding-left: 30px;
+  font-size: 15px;
+  /* transition: ease-in-out 0.20s; */
+}
+
+.txtmail {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  height: 39px;
+  width: 346px;
+  background: url(/assets/img/icon/mail.svg) no-repeat left center;
+  /* background-color: rgba(58, 61, 66, 0.1); */
+  color: var(--color-primary);
+  padding-left: 30px;
+  font-size: 15px;
+  /* transition: ease-in-out 0.20s; */
+}
+
+.txt-blue {
+  color: #6379f4;
+}
+
+.btn-login {
+  border-radius: 8px;
+  background: #DADADA;
+  ;
+}
