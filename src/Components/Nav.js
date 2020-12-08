@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import {useDispatch} from 'react-redux';
-import {Link, useHistory, useLocation} from 'react-router-dom';
-import {AuthLogout} from '../redux/actions/Auth';
+import React, { Component } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { AuthLogout } from "../redux/actions/Auth";
 
-const Nav = () => {
+const Nav = (props) => {
   let location = useLocation();
   let history = useHistory();
   // console.log(props, "osososos");
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return <Navigation onLogout={onLogout} />;
   // return <NaviResponsive onLogout={onLogout} />;

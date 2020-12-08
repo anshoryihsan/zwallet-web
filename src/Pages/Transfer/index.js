@@ -1,5 +1,8 @@
-import transfer from './Transfer';
-export default transfer;
+import Transfer from "./Transfer";
+import Amountbank from "./Amountbank";
+import Confirm from "./Confirm";
+import Status from "./Status";
+export { Transfer, Amountbank, Confirm, Status };
 
 // import React from "react";
 // import { useDispatch, useSelector } from "react-redux";

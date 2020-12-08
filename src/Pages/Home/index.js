@@ -1,28 +1,51 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Link, useHistory, useLocation} from 'react-router-dom';
-import './home.css';
-import {AuthLogout} from '../../redux/actions/Auth';
-import {Header, Footer, Nav} from '../../Components';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import "./home.css";
+import { AuthLogout } from "../../redux/actions/Auth";
+import { Header, Footer, Nav } from "../../Components";
+import { SOCKET_URL, IMAGE_URL } from "../../Helper/Environment";
+import ioClient from "socket.io-client";
 
-import {UserData, UserTransactionHistory} from '../../redux/actions/User.js';
+import { UserData, UserTransactionHistory } from "../../redux/actions/User.js";
 
 const Home = () => {
   let history = useHistory();
   const dispatch = useDispatch();
 
-  const {token} = useSelector((state) => state.Auth);
-  const {userdata} = useSelector((state) => state.User);
-  // console.log(token, 'home token');
+  const { token } = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
+  const { userdatahistory } = useSelector((state) => state.User);
+  const { id } = userdata;
+  // const [balance_, setBalance_] = useState(() || 0);
 
   useEffect(() => {
+    dispatch(UserTransactionHistory(token));
     dispatch(UserData(token));
   }, [dispatch, token]);
   // console.log(userdata, 'user data home');
 
+  const socket = ioClient(SOCKET_URL, {
+    query: { id },
+    transports: ["websocket"],
+    // transports: ["websocket", "polling", "flashsocket"], //cors
+  });
+  useEffect(() => {
+    if (socket == null) return;
+    socket.on("info_balance", (data) => {
+      const { balance } = data[0];
+      // setBalance_(balance);
+      // dispatch(UserData(token));
+    });
+    return () => {
+      // socket.close();
+      socket.off("info_balance");
+    };
+  }, [socket]);
+
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
 
   return (
@@ -36,20 +59,15 @@ const Home = () => {
               <Content
                 data={userdata}
                 userdata={userdata}
-                token={token}
                 onLogout={onLogout}
               />
               <Chart />
-              <TransactonHistory token={token} userdata={userdata} />
+              <TransactonHistory
+                userdata={userdata}
+                userdatahistory={userdatahistory}
+              />
             </main>
           </section>
-          {/* <Content
-            data={userdata}
-            userdata={userdata}
-            token={token}
-            onLogout={onLogout}
-          /> */}
-          {/* <TransactonHistory token={token} userdata={userdata} /> */}
         </section>
       </main>
       <Footer />
@@ -58,8 +76,8 @@ const Home = () => {
 };
 
 const Content = (props) => {
-  const {data} = props;
-  const {balance, phone} = data;
+  const { data } = props;
+  const { balance, phone } = data;
 
   return (
     <>
@@ -70,9 +88,9 @@ const Content = (props) => {
           <section className="">
             <span className="txt-white">Balance</span>
             <div className="h3 txt-white font-weight-bold my-3">
-              Rp {!balance ? '0' : balance}
+              Rp {!balance ? "0" : balance}
             </div>
-            <span className="txt-white small">{!phone ? '-' : phone}</span>
+            <span className="txt-white small">{!phone ? "-" : phone}</span>
           </section>
           <section className="d-lg-flex flex-column">
             <Link to="/transfer">
@@ -107,23 +125,7 @@ const Chart = () => {
 };
 
 const TransactonHistory = (props) => {
-  const {token, userdata} = props;
-  const {userdatahistory} = useSelector((state) => state.User);
-  // const {userdata} = useSelector((state) => state.User);
-  console.log(userdata, 'asdadawdhawdjkasjkd');
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(UserTransactionHistory(token));
-  }, [dispatch, token]);
-
-  // userdatahistory.map((item) => {
-  //   if (item.from_ === userdata.first_name) {
-  //     // console.log(item.to_);
-  //   } else if (item.to_ === userdata.first_name) {
-  //     // console.log(item.from_);
-  //   }
-  // });
+  const { userdata, userdatahistory } = props;
 
   return (
     <aside className="col-lg-4 col-12 pt-3 pt-lg-0 bg-color-white shadow-sm">
@@ -144,11 +146,34 @@ const TransactonHistory = (props) => {
               <div className="d-flex align-items-center justify-content-between py-3">
                 <div className="d-flex align-items-center">
                   {item.from_ === userdata.first_name ? (
-                    <img src={item.to_photo} alt="img" />
+                    <img
+                      src={
+                        !item.photo
+                          ? "/assets/img/icon/user.svg"
+                          : IMAGE_URL + item.photo
+                      }
+                      height="50px"
+                      width="50px"
+                      alt="img"
+                    />
                   ) : item.to_ === userdata.first_name ? (
-                    <img src={item.from_photo} alt="img" />
+                    <img
+                      src={
+                        !item.photo
+                          ? "/assets/img/icon/user.svg"
+                          : IMAGE_URL + item.from_photo
+                      }
+                      height="50px"
+                      width="50px"
+                      alt="img"
+                    />
                   ) : (
-                    <img src="/assets/img/icon/user.svg" alt="img" />
+                    <img
+                      src="/assets/img/icon/user.svg"
+                      height="50px"
+                      width="50px"
+                      alt="img"
+                    />
                   )}
 
                   <div className="ml-2 pl-2 flex-row">

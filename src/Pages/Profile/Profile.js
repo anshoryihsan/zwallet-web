@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import './status.css';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import "./status.css";
+import { IMAGE_URL } from "../../Helper/Environment";
 
-import {AuthLogout} from '../../redux/actions/Auth';
-import {UploadPhoto} from '../../redux/actions/User';
-import {Header, Footer} from '../../Components';
+import { AuthLogout } from "../../redux/actions/Auth";
+import { UploadPhoto } from "../../redux/actions/User";
+import { Header, Footer } from "../../Components";
 
 function Profile() {
-  const {register, handleSubmit} = useForm();
-  const [photo, setPhoto] = useState('');
-  const {token} = useSelector((state) => state.Auth);
-  const {userdata} = useSelector((state) => state.User);
+  const { register, handleSubmit } = useForm();
+  const [photo, setPhoto] = useState("");
+  const { token } = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,17 +23,25 @@ function Profile() {
   };
 
   const insertPhoto = (data) => {
-    //   const formData = new FormData();
-    console.log(data.image[0], 'photo');
-    //   formData.append(
-    //     "photo",
-    //     photo
-    //   );
+    const formData = new FormData();
+    // formData.append("photo", {
+    //   uri: response.uri,
+    //   name: response.fileName,
+    //   type: response.type,
+    // });
+
+    formData.append("photo", data.image);
+    console.log(formData, "photo");
+    // console.log(data.image[0], "photo");
+    // formData.append(
+    //   "photo",
+    //   photo
+    // );
     //   const data={image:formData}
     //   console.log(data);
     //   console.log(e.image[0],'photo');
     //   console.log(formData,'formdata');
-    dispatch(UploadPhoto(token, data.image[0]));
+    // dispatch(UploadPhoto(token, data.image[0]));
   };
   //   const onSubmit = () => {
   //     dispatch(InsertUserPhoto(token, photo));
@@ -40,7 +49,7 @@ function Profile() {
 
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return (
     <div>
@@ -68,8 +77,13 @@ function Profile() {
 }
 
 const Content = (props) => {
-  const {data, token} = props;
-  //   console.log(props.history, 'props data');
+  const { data, token } = props;
+  const dispatch = useDispatch();
+  const _setPhoto = (e) => {
+    const formData = new FormData();
+    formData.append("photo", e.target.files[0]);
+    dispatch(UploadPhoto(token, formData));
+  };
   return (
     <section className="col-lg-10 col-sm-12 px-4">
       <main className="row">
@@ -80,24 +94,37 @@ const Content = (props) => {
               className="mt-5 d-flex flex-column align-items-center"
             >
               <img
-                src={!data.photo ? '/assets/img/icon/user.svg' : data.photo}
+                src={
+                  !data.photo
+                    ? "/assets/img/icon/user.svg"
+                    : IMAGE_URL + data.photo
+                }
+                height="70px"
+                width="70px"
                 alt="img"
               />
-              <div
+              <label
                 className="font-weight-bold mt-3 mb-2"
-                data-toggle="modal"
-                data-target="#myModal"
+                style={{ cursor: "pointer" }}
+                // data-toggle="modal"
+                // data-target="#myModal"
               >
                 <img src="/assets/img/icon/edit-icon.svg" />
                 <span className="p-0 small text-black-50">edit</span>
-              </div>
+                <input
+                  type="file"
+                  className="d-none"
+                  onChange={_setPhoto}
+                  accept="image/*"
+                />
+              </label>
               <div className="font-weight-bold">
-                {!data.first_name ? ' ' : data.first_name}
+                {!data.first_name ? " " : data.first_name}
                 {/* {!Profile.data ? " " : Profile.data[0].last_name} */}
               </div>
               <div className="font-weight-bold small txt-grey mt-1 mb-5">
                 <span className="p-0 small text-black-50">
-                  {!data.phone ? ' ' : data.phone}
+                  {!data.phone ? " " : data.phone}
                 </span>
               </div>
             </div>
@@ -110,7 +137,7 @@ const Content = (props) => {
                   className="p-3 font-weight-bold txt-dark"
                   onClick={() =>
                     props.history.push({
-                      pathname: '/profile/profile-info',
+                      pathname: "/profile/profile-info",
                       token: token,
                       data: data,
                     })
@@ -197,6 +224,7 @@ const Modal = (props) => {
   //   })
   // );
   //   };
+
   return (
     <div className="modal fade" id="myModal" role="dialog">
       <div className="modal-dialog modal-sm">
@@ -223,7 +251,7 @@ const Modal = (props) => {
                 type="file"
                 name="image"
                 ref={props.register}
-                accept="image"
+                accept="image/*"
               />
               <div className="d-flex align-items-center  mt-5 shadow-sm">
                 <input

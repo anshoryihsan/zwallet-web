@@ -1,5 +1,8 @@
 import axios from "../../Helper/axios";
 
+const processReques = () => {
+  return { type: "PROCESS_REQUES" };
+};
 const userData = (data) => {
   return { type: "USER_DATA", payload: data };
 };
@@ -12,9 +15,6 @@ const getAllUserData = (data) => {
 const uploadPhoto = (data) => {
   return { type: "UPLOAD_PHOTO", payload: data };
 };
-const updateUserPhone = (data) => {
-  return { type: "UPDATE_USER_PHONE", payload: data };
-};
 const updateUserData = (data) => {
   return { type: "UPDATE_USER_DATA", payload: data };
 };
@@ -26,6 +26,9 @@ const insertData = (data) => {
 };
 const deleteData = (data) => {
   return { type: "DELETE_DATA", payload: data };
+};
+const userDataTransaction = (data) => {
+  return { type: "USER_DATA_TRANSACTION", payload: data };
 };
 const statusError = (error) => {
   return { type: "STATUS_ERROR", payload: error };
@@ -87,17 +90,35 @@ export const GetAllUserData = (token, name = null, page = 0, reset = true) => (
     });
 };
 
-export const UploadPhoto = (token, photo) => (dispatch) => {
+export const getUserId = (token, data) => (dispatch) => {
+  const id = data;
+  dispatch(processReques());
   axios
-    .patch("/profile/", photo, {
+    .get(`/profile/${id}`, { headers: { token: `${token}` } })
+    .then((res) => {
+      if (res.data.success) {
+        return dispatch(userDataTransaction(res.data.data[0]));
+      } else {
+        return dispatch(statusError(res.data.data));
+      }
+    })
+    .catch((err) => {
+      return dispatch(statusError(err.data.data));
+    });
+};
+
+export const UploadPhoto = (token, data) => (dispatch) => {
+  axios
+    .patch("/profile", data, {
       headers: {
-        "content-type": "multipart/form-data",
         token: `${token}`,
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((res) => {
       //   console.log(res.data, 'userrr data');
       if (res.data.success) {
+        dispatch(UserData(token));
         dispatch(uploadPhoto(res.data.data[0]));
       } else {
         dispatch(statusError(res.data.data));
@@ -143,6 +164,7 @@ export const UpdateUserProfile = (token, data, history) => (dispatch) => {
       console.log(res.data, "userrr data");
       if (res.data.success) {
         dispatch(updateData(res.data.data[0]));
+        dispatch(UserData(token));
         history.replace("/profile");
       } else {
         dispatch(statusError(res.data.data));
@@ -165,6 +187,7 @@ export const DeleteUserPhone = (token, data, history) => (dispatch) => {
       //   console.log(res.data, 'userrr data');
       if (res.data.success) {
         dispatch(deleteData(res.data.data[0]));
+        dispatch(UserData(token));
         history.push("/profile/change-phone");
       } else {
         dispatch(statusError(res.data.data));

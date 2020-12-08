@@ -1,12 +1,13 @@
 // import './index.css';
-import React, {Component} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {TextBlock} from 'react-placeholder/lib/placeholders';
-import {getUserToken} from '../redux/actions/Profile';
+import React, { Component } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TextBlock } from "react-placeholder/lib/placeholders";
+import { getUserToken } from "../redux/actions/Profile";
+import { IMAGE_URL } from "../Helper/Environment";
 
 const Header = (props) => {
-  const {data} = props;
-  const {first_name, phone, photo} = data;
+  const { data } = props;
+  const { first_name, phone, photo } = data;
   // console.log(first_name, 'header');
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm nav-bar hide">
@@ -32,7 +33,7 @@ const Header = (props) => {
               <div className="d-flex align-items-center">
                 <img
                   className="mobile-l"
-                  src={!photo ? '/assets/img/icon/user.svg' : photo}
+                  src={!photo ? "/assets/img/icon/user.svg" : IMAGE_URL + photo}
                   alt="user"
                   height="50px"
                   width="50px"
@@ -43,7 +44,7 @@ const Header = (props) => {
                   {!first_name ? (
                     <TextBlock
                       rows={1}
-                      style={{width: 170, marginBottom: 10, height: 25}}
+                      style={{ width: 170, marginBottom: 10, height: 25 }}
                       color="#f0f0f0"
                     />
                   ) : (
@@ -54,7 +55,7 @@ const Header = (props) => {
                   {!phone ? (
                     <TextBlock
                       rows={1}
-                      style={{width: 170, marginBottom: 10, height: 25}}
+                      style={{ width: 170, marginBottom: 10, height: 25 }}
                       color="#f0f0f0"
                     />
                   ) : (
@@ -73,7 +74,7 @@ const Header = (props) => {
           ) : (
             <TextBlock
               rows={1}
-              style={{width: 170, marginBottom: 10, height: 25}}
+              style={{ width: 170, marginBottom: 10, height: 25 }}
               color="#f0f0f0"
             />
           )}

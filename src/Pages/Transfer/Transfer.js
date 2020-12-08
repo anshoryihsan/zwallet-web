@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthLogout } from "../../redux/actions/Auth";
 import { Header, Footer } from "../../Components";
+import { IMAGE_URL } from "../../Helper/Environment";
 
-import { GetAllUserData } from "../../redux/actions/User";
+import { GetAllUserData, getUserId } from "../../redux/actions/User";
 
 function Transfer() {
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ function Transfer() {
   const { token } = useSelector((state) => state.Auth);
   const { getalluserdata } = useSelector((state) => state.User);
 
-  console.log(getalluserdata);
+  // console.log(getalluserdata);
 
   useEffect(() => {
     setLoading(true);
@@ -62,6 +63,7 @@ function Transfer() {
             hasMore={hasMore}
             loading={loading}
             loadMore={loadMore}
+            token={token}
           />
         </section>
       </main>
@@ -71,8 +73,8 @@ function Transfer() {
 }
 
 function Content(props) {
-  const { data, onChange, value, hasMore, loading, loadMore } = props;
-  // console.log(props, 'props');
+  const { data, onChange, value, hasMore, loading, loadMore, token } = props;
+  const dispatch = useDispatch();
   return (
     <section className="col-lg-10 col-sm-12 px-4">
       <main className="row">
@@ -110,14 +112,19 @@ function Content(props) {
                   return (
                     <div className="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 mt-2 py-3">
                       <div className="d-flex align-items-center">
-                        <img src={item.photo} height="56px" width="56px" />
+                        <img
+                          src={IMAGE_URL + item.photo}
+                          height="56px"
+                          width="56px"
+                        />
                         <div className="pl-3">
-                          <a
-                            href="./amountbank.html"
+                          <Link
+                            onClick={() => dispatch(getUserId(token, item.id))}
+                            to="/transfer/amount-bank"
                             className="font-weight-bold text-dark"
                           >
                             {item.first_name}
-                          </a>
+                          </Link>
                           <div className="small">{item.phone}</div>
                         </div>
                       </div>
