@@ -1,8 +1,0 @@
-[1020/171335.423:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Ihsan Anshory\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d5d05495-6b97-43c8-b8dd-b9baf6c564e0: The system cannot find the path specified. (0x3)
-[1020/171335.486:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
-[1020/171648.353:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1021/171702.290:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1021/194429.528:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1029/163628.913:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1031/065240.020:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
-[1103/072037.905:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
