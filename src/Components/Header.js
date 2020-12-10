@@ -1,8 +1,6 @@
 // import './index.css';
-import React, { Component } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { TextBlock } from "react-placeholder/lib/placeholders";
-import { getUserToken } from "../redux/actions/Profile";
 import { IMAGE_URL } from "../Helper/Environment";
 
 const Header = (props) => {

@@ -199,3 +199,15 @@ body {
   border: none;
   width: 200px;
 }
+
+.pincode-input-text
+{
+  border-radius: 8px;
+  padding:0 !important;
+  /* margin:0 2px; */
+  /* text-align:center; */
+  border: 1px solid;
+  /* background: transparent; */
+  width: 35px  !important;
+  height: 35px !important;
+}

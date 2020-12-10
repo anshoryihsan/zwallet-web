@@ -138,12 +138,7 @@ function Content(props) {
               </div>
               <div className="w-100 d-flex justify-content-end mt-5">
                 <button
-                  disabled={
-                    balance === 0 ||
-                    balance < amount ||
-                    amount === "" ||
-                    note === ""
-                  }
+                  disabled={balance === 0 || amount === "" || note === ""}
                   onClick={() =>
                     props.history.push(
                       `/transfer/confirm?amount=${amount}&note=${note}`
@@ -203,7 +198,6 @@ function Nav(props) {
             <Link to="/top-up" className="text-dark">
               <h6 className="ml-2 mb-0">Top Up</h6>
             </Link>
-            <a href="/top-up/top-up.html"></a>
           </li>
           <li className="d-flex align-items-center my-4">
             <img

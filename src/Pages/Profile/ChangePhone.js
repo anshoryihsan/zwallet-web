@@ -1,30 +1,30 @@
-import React, {useState} from 'react';
-import './status.css';
-import {Header, Footer} from '../../Components';
-import {Link, useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React from "react";
+import "./status.css";
+import { Header, Footer } from "../../Components";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import {AuthLogout} from '../../redux/actions/Auth';
-import {UpdateUserProfile} from '../../redux/actions/User';
+import { AuthLogout } from "../../redux/actions/Auth";
+import { UpdateUserProfile } from "../../redux/actions/User";
 
 function ChangePhone() {
-  const [phone, setPhone] = React.useState('');
+  const [phone, setPhone] = React.useState("");
   //   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const {userdata} = useSelector((state) => state.User);
-  const {token} = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
+  const { token } = useSelector((state) => state.Auth);
 
   const onSubmit = (e) => {
     // console.log(phone, 'phone');
     e.preventDefault(e);
-    dispatch(UpdateUserProfile(token, {phone: phone}, history));
+    dispatch(UpdateUserProfile(token, { phone: phone }, history));
   };
 
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return (
     <div>
@@ -123,7 +123,7 @@ const Nav = (props) => {
                 height="24px"
                 width="24px"
               />
-              <Link className="text-dark">
+              <Link to="/top-up" className="text-dark">
                 <h6 className="ml-2 mb-0">Top Up</h6>
               </Link>
               <a href="/top-up/top-up.html"></a>

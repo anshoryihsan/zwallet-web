@@ -1,40 +1,42 @@
-import React, {useState} from 'react';
-import './status.css';
-import {Header, Footer} from '../../Components';
-import {Link, useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React from "react";
+import "./status.css";
+import { Header, Footer } from "../../Components";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import {AuthLogout} from '../../redux/actions/Auth';
-import {UpdateUserProfile} from '../../redux/actions/User';
+import { AuthLogout } from "../../redux/actions/Auth";
+import { UpdateUserProfile } from "../../redux/actions/User";
+import PinInput from "react-pin-input";
 
 function ChangePin() {
-  const [password, setPassword] = React.useState('');
-  const [newPass, setNewPass] = React.useState('');
-  const [newRepeatPass, setNewRepeatPass] = React.useState('');
+  const [password, setPassword] = React.useState("");
+  const [newPass, setNewPass] = React.useState("");
+  const [newRepeatPass, setNewRepeatPass] = React.useState("");
   const [Error, setError] = React.useState(true);
+  const [_pin, _setPin] = React.useState("");
   //   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+  console.log(_pin);
+  const { userdata } = useSelector((state) => state.User);
+  const { token } = useSelector((state) => state.Auth);
 
-  const {userdata} = useSelector((state) => state.User);
-  const {token} = useSelector((state) => state.Auth);
-
-  const onSubmit = (e) => {
-    console.log(password, 'pass');
-    console.log(newPass, 'newpass');
-    console.log(newRepeatPass, 'rpass');
-    e.preventDefault(e);
-    if (newPass === newRepeatPass) {
-      dispatch(UpdateUserProfile(token, {password: newPass}, history));
-      setError(true);
-    } else {
-      setError(false);
-    }
+  const onSubmit = () => {
+    // console.log(password, "pass");
+    // console.log(newPass, "newpass");
+    // console.log(newRepeatPass, "rpass");
+    // e.preventDefault(e);
+    dispatch(UpdateUserProfile(token, { pin: _pin }, history));
+    // if (newPass === newRepeatPass) {
+    //   setError(true);
+    // } else {
+    //   setError(false);
+    // }
   };
 
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return (
     <div>
@@ -43,6 +45,8 @@ function ChangePin() {
         <section className="row">
           <Nav onLogout={onLogout} />
           <Content
+            _setPin={_setPin}
+            _pin={_pin}
             onSubmit={onSubmit}
             password={password}
             setPassword={setPassword}
@@ -61,7 +65,9 @@ function ChangePin() {
 }
 
 const Content = (props) => {
-  console.log(props);
+  const { _setPin, _pin, onSubmit } = props;
+  // console.log(props);
+
   //   const {phone} = props;
   //   console.log(phone, 'props');
   return (
@@ -72,13 +78,25 @@ const Content = (props) => {
             <section className="d-flex justify-content-between align-items-center">
               <span className="font-weight-bold small">Change PIN</span>
             </section>
-            <section class="w-50 d-lg-block mt-4 txt-grey mb-5">
+            <section className="w-50 d-lg-block mt-4 txt-grey mb-5">
               Enter your current 6 digits Zwallet PIN below to continue to the
               next steps.
             </section>
-            <form onSubmit={(e) => props.onSubmit(e)}>
-              <div className="mt-2 d-flex flex-column align-items-center">
-                {/* <div className="input-container mt-5">
+            {/* <form onSubmit={(e) => props.onSubmit(e)}> */}
+            <div className="mt-2 d-flex flex-column align-items-center">
+              <PinInput
+                length={6}
+                autoSelect={true}
+                secret
+                initialValue=""
+                type="numeric"
+                inputMode="number"
+                regexCriteria={/^[ 0-9_@./#&+-]*$/}
+                onChange={(value) => {
+                  _setPin(value);
+                }}
+              />
+              {/* <div className="input-container mt-5">
                   <label className="d-flex w-100">
                     <input
                       placeholder="Current password"
@@ -90,51 +108,52 @@ const Content = (props) => {
                     />
                   </label>
                 </div> */}
-                <div class="row my-2 no-gutters">
-                  <div class="col-2">
+
+              {/* <div className="row my-2 no-gutters">
+                  <div className="col-2">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
                   </div>
-                  <div class="col-2">
+                  <div className="col-2">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
                   </div>
-                  <div class="col-2 ">
+                  <div className="col-2 ">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
                   </div>
-                  <div class="col-2 ">
+                  <div className="col-2 ">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
                   </div>
-                  <div class="col-2 ">
+                  <div className="col-2 ">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
                   </div>
-                  <div class="col-2 ">
+                  <div className="col-2 ">
                     <input
-                      class="pin input-bordered-small_ input-container"
-                      type="text"
+                      className="pin input-bordered-small_ input-container"
+                      type="password"
                       name=""
                       maxlength="1"
                     />
@@ -146,16 +165,18 @@ const Content = (props) => {
                       New Password not same
                     </span>
                   ) : null}
-                </div>
+                </div> */}
 
-                <button
-                  class="btn_ shadow-sm py-2 font-weight-bold mt-5 bg-color-grey small txt-grey mb-5"
-                  type="submit"
-                >
-                  Change Pin
-                </button>
-              </div>
-            </form>
+              <button
+                className="btn_ shadow-sm py-2 font-weight-bold mt-5 bg-color-grey small txt-grey mb-5"
+                onClick={onSubmit}
+                disabled={_pin == ""}
+                type="submit"
+              >
+                Change Pin
+              </button>
+            </div>
+            {/* </form> */}
             {/* <script>
               {$('input[type=text]').autotab(); $('.pin').autotab('filter',
               'number');}

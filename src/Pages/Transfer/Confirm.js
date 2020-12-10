@@ -240,6 +240,8 @@ function Modal(props) {
             <button
               type="submit"
               className="btn-continue py-2 px-3"
+              data-dismiss="modal"
+              aria-label="Close"
               onClick={onContinue}
               disabled={_pin == ""}
             >

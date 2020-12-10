@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./home.css";
 import { AuthLogout } from "../../redux/actions/Auth";
 import { Header, Footer, Nav } from "../../Components";

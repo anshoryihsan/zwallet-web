@@ -1,8 +1,8 @@
-import React from 'react';
-import {Link, useHistory, useLocation} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {AuthLogout} from '../../redux/actions/Auth';
-const LandingPage = (props) => {
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthLogout } from "../../redux/actions/Auth";
+const LandingPage = () => {
   let history = useHistory();
   const dispatch = useDispatch();
   const onLogout = () => {

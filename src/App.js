@@ -53,7 +53,6 @@ function App() {
         />
         <PrivateRoute component={ChangePin} path="/profile/change-pin" />
         {/* <PublicRoute exact component={Test} restricted={true} path="/test" /> */}
-        {/* <PublicRoute exact component={Login} restricted={true} path="/login" />*/}
         {/* 
         <PublicRoute exact component={LandingPage} restricted={true} path="/test" /> 
       */}

@@ -1,40 +1,40 @@
-import React, {useState} from 'react';
-import './status.css';
-import {Header, Footer} from '../../Components';
-import {Link, useHistory} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React from "react";
+import "./status.css";
+import { Header, Footer } from "../../Components";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import {AuthLogout} from '../../redux/actions/Auth';
-import {UpdateUserProfile} from '../../redux/actions/User';
+import { AuthLogout } from "../../redux/actions/Auth";
+import { UpdateUserProfile } from "../../redux/actions/User";
 
 function ChangePassword() {
-  const [password, setPassword] = React.useState('');
-  const [newPass, setNewPass] = React.useState('');
-  const [newRepeatPass, setNewRepeatPass] = React.useState('');
+  const [password, setPassword] = React.useState("");
+  const [newPass, setNewPass] = React.useState("");
+  const [newRepeatPass, setNewRepeatPass] = React.useState("");
   const [Error, setError] = React.useState(true);
   //   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const {userdata} = useSelector((state) => state.User);
-  const {token} = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
+  const { token } = useSelector((state) => state.Auth);
 
   const onSubmit = (e) => {
-    console.log(password, 'pass');
-    console.log(newPass, 'newpass');
-    console.log(newRepeatPass, 'rpass');
+    console.log(password, "pass");
+    console.log(newPass, "newpass");
+    console.log(newRepeatPass, "rpass");
     e.preventDefault(e);
-    if (newPass===newRepeatPass) {
-      dispatch(UpdateUserProfile(token, {password: newPass}, history));
-      setError(true)
-    }else{
-      setError(false)
+    if (newPass === newRepeatPass) {
+      dispatch(UpdateUserProfile(token, { password: newPass }, history));
+      setError(true);
+    } else {
+      setError(false);
     }
   };
 
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return (
     <div>
@@ -42,11 +42,17 @@ function ChangePassword() {
       <main className="container my-4">
         <section className="row">
           <Nav onLogout={onLogout} />
-          <Content onSubmit={onSubmit} 
-          password={password} setPassword={setPassword} 
-          newPass={newPass} setNewPass={setNewPass} 
-          newRepeatPass={newRepeatPass} setNewRepeatPass={setNewRepeatPass} 
-          Error={Error} setError={setError}/>
+          <Content
+            onSubmit={onSubmit}
+            password={password}
+            setPassword={setPassword}
+            newPass={newPass}
+            setNewPass={setNewPass}
+            newRepeatPass={newRepeatPass}
+            setNewRepeatPass={setNewRepeatPass}
+            Error={Error}
+            setError={setError}
+          />
         </section>
       </main>
       <Footer />
@@ -55,9 +61,6 @@ function ChangePassword() {
 }
 
 const Content = (props) => {
-  console.log(props);
-  //   const {phone} = props;
-  //   console.log(phone, 'props');
   return (
     <section className="col-lg-10 col-sm-12 px-4">
       <main className="row">
@@ -73,14 +76,13 @@ const Content = (props) => {
 
             <div className="mt-2 d-flex flex-column align-items-center">
               <form onSubmit={(e) => props.onSubmit(e)}>
-
                 <div className="input-container mt-5">
                   <label className="d-flex w-100">
                     <input
                       placeholder="Current password"
                       type="password"
                       className="txtpass_ txt-grey"
-                       onChange={(e) => props.setPassword(e.target.value)}
+                      onChange={(e) => props.setPassword(e.target.value)}
                       value={props.password}
                       required
                     />
@@ -92,7 +94,7 @@ const Content = (props) => {
                       placeholder="New password"
                       type="password"
                       className="txtpass_ txt-grey"
-                       onChange={(e) => props.setNewPass(e.target.value)}
+                      onChange={(e) => props.setNewPass(e.target.value)}
                       value={props.newPass}
                       required
                     />
@@ -104,23 +106,25 @@ const Content = (props) => {
                       placeholder="Repeat new password"
                       type="password"
                       className="txtpass_ txt-grey"
-                       onChange={(e) => props.setNewRepeatPass(e.target.value)}
+                      onChange={(e) => props.setNewRepeatPass(e.target.value)}
                       value={props.newRepeatPass}
                       required
                     />
                   </label>
                 </div>
                 <div>
-                {!props.Error?(
-                  <span className="text-danger small text-center mt-3">New Password not same</span>
-                ):null}
+                  {!props.Error ? (
+                    <span className="text-danger small text-center mt-3">
+                      New Password not same
+                    </span>
+                  ) : null}
                 </div>
 
                 <button
                   className="btn_ shadow-sm py-2 font-weight-bold mt-5 bg-color-grey small txt-grey mb-5"
                   type="submit"
                 >
-                  Add Phone Number
+                  Add New Password
                 </button>
               </form>
             </div>

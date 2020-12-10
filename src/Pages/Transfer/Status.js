@@ -234,7 +234,6 @@ function Nav(props) {
             <Link to="/top-up" className="text-dark">
               <h6 className="ml-2 mb-0">Top Up</h6>
             </Link>
-            <a href="/top-up/top-up.html"></a>
           </li>
           <li className="d-flex align-items-center my-4">
             <img

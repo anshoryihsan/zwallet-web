@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import './status.css';
-import {Header, Footer} from '../../Components';
-import {Link, useHistory, useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect } from "react";
+import "./status.css";
+import { Header, Footer } from "../../Components";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import {AuthLogout} from '../../redux/actions/Auth';
-import {DeleteUserPhone} from '../../redux/actions/User';
+import { AuthLogout } from "../../redux/actions/Auth";
+import { DeleteUserPhone } from "../../redux/actions/User";
 
 function Managephone() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const {userdata} = useSelector((state) => state.User);
-  const {token} = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
+  const { token } = useSelector((state) => state.Auth);
 
   // useEffect(
   //   function deleteClick() {
@@ -30,7 +30,7 @@ function Managephone() {
 
   const deleteClick = () => {
     setLoading(true);
-    dispatch(DeleteUserPhone(token, {phone: ' '}, history));
+    dispatch(DeleteUserPhone(token, { phone: " " }, history));
     setLoading(false);
   };
 
@@ -38,7 +38,7 @@ function Managephone() {
 
   const onLogout = () => {
     dispatch(AuthLogout());
-    history.replace('/login');
+    history.replace("/login");
   };
   return (
     <div>
@@ -59,7 +59,7 @@ function Managephone() {
 }
 
 const Content = (props) => {
-  const {data} = props;
+  const { data } = props;
 
   return (
     <section class="col-lg-10 col-sm-12 px-4">
@@ -81,7 +81,7 @@ const Content = (props) => {
                     <span class="font-weight-bold text-dark">loading...</span>
                   ) : (
                     <span class="font-weight-bold text-dark">
-                      {!data.phone ? ' ' : data.phone}
+                      {!data.phone ? " " : data.phone}
                     </span>
                   )}
                 </div>

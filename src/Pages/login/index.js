@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { login } from "../../utils";
+// import { login } from "../../utils";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthLogin } from "../../redux/actions/Auth";
@@ -88,7 +88,7 @@ const Login = () => {
                   <label className="d-flex w-100">
                     <input
                       placeholder="Enter your password"
-                      type="text"
+                      type="password"
                       name="password"
                       onChange={(e) => setPassword(e.target.value)}
                       className="txtpass"
