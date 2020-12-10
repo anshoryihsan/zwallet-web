@@ -29,13 +29,13 @@ export const AuthLogin = (data, history) => (dispatch) => {
 };
 
 export const AuthSignup = (data, history) => (dispatch) => {
-  console.log(data);
+  // console.log(data);
   axios
     .post("/auth/register", data)
     .then((res) => {
       if (res.data.success) {
         dispatch(authSuccess(res.data.data));
-        return history.replace(`/login`);
+        return history.push(`/login`);
       } else {
         dispatch(authError(res.data.data));
       }

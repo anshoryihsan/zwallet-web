@@ -145,23 +145,12 @@ const TransactonHistory = (props) => {
             return (
               <div className="d-flex align-items-center justify-content-between py-3">
                 <div className="d-flex align-items-center">
-                  {item.from_ === userdata.first_name ? (
+                  {item.profile_id === userdata.id ? (
                     <img
                       src={
-                        !item.photo
+                        !item.to_photo
                           ? "/assets/img/icon/user.svg"
-                          : IMAGE_URL + item.photo
-                      }
-                      height="50px"
-                      width="50px"
-                      alt="img"
-                    />
-                  ) : item.to_ === userdata.first_name ? (
-                    <img
-                      src={
-                        !item.photo
-                          ? "/assets/img/icon/user.svg"
-                          : IMAGE_URL + item.from_photo
+                          : IMAGE_URL + item.to_photo
                       }
                       height="50px"
                       width="50px"
@@ -169,7 +158,11 @@ const TransactonHistory = (props) => {
                     />
                   ) : (
                     <img
-                      src="/assets/img/icon/user.svg"
+                      src={
+                        !item.from_photo
+                          ? "/assets/img/icon/user.svg"
+                          : IMAGE_URL + item.from_photo
+                      }
                       height="50px"
                       width="50px"
                       alt="img"
@@ -177,29 +170,27 @@ const TransactonHistory = (props) => {
                   )}
 
                   <div className="ml-2 pl-2 flex-row">
-                    {item.from_ === userdata.first_name ? (
+                    {item.profile_id === userdata.id ? (
                       <span className="p-1 font-weight-bold small">
                         {item.to_}
                       </span>
-                    ) : item.to_ === userdata.first_name ? (
+                    ) : (
                       <span className="p-1 font-weight-bold small">
                         {item.from_}
                       </span>
-                    ) : (
-                      <span className="p-1 font-weight-bold small"></span>
                     )}
 
-                    {item.profile_id !== userdata.id ? (
-                      <span className="p-1 small">Transfer</span>
-                    ) : (
+                    {item.profile_id === userdata.id ? (
                       <span className="p-1 small">Subsription</span>
+                    ) : (
+                      <span className="p-1 small">Transfer</span>
                     )}
                   </div>
                 </div>
-                {item.profile_id !== userdata.id ? (
-                  <span className="text-success small">+ Rp{item.amount}</span>
-                ) : (
+                {item.profile_id === userdata.id ? (
                   <span className="txt-red small">- Rp{item.amount}</span>
+                ) : (
+                  <span className="text-success small">+ Rp{item.amount}</span>
                 )}
               </div>
             );

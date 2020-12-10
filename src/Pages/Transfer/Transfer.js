@@ -113,7 +113,11 @@ function Content(props) {
                     <div className="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 mt-2 py-3">
                       <div className="d-flex align-items-center">
                         <img
-                          src={IMAGE_URL + item.photo}
+                          src={
+                            !item.photo
+                              ? "/assets/img/icon/user.svg"
+                              : IMAGE_URL + item.photo
+                          }
                           height="56px"
                           width="56px"
                         />

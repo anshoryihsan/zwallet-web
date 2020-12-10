@@ -85,28 +85,27 @@ function Nav(props) {
               <h6 className="ml-2 mb-0">Dashboard</h6>
             </Link>
           </li>
-          <li className="d-flex align-items-center my-4 active">
+          <li className="d-flex align-items-center my-4">
             <img
               alt="transfer"
-              src="/assets/img/icon/arrow-up_.svg"
+              src="/assets/img/icon/arrow-up.svg"
               height="24px"
               width="24px"
             />
-            <Link to="/transfer" className="txt-blue">
+            <Link to="/transfer" className="txt-dark">
               <h6 className="ml-2 mb-0">Transfer</h6>
             </Link>
           </li>
-          <li className="d-flex align-items-center my-4">
+          <li className="d-flex align-items-center my-4 active">
             <img
               alt="plus"
-              src="/assets/img/icon/plus.svg"
+              src="/assets/img/icon/plus_.svg"
               height="24px"
               width="24px"
             />
-            <Link to="/top-up" className="text-dark">
+            <Link to="/top-up" className="text-blue">
               <h6 className="ml-2 mb-0">Top Up</h6>
             </Link>
-            <a href="/top-up/top-up.html"></a>
           </li>
           <li className="d-flex align-items-center my-4">
             <img

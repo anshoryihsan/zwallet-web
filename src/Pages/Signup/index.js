@@ -1,19 +1,28 @@
-import React, {useState} from 'react';
-import './style.css';
-import {login} from '../../utils';
-import {Link, useHistory, useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {AuthSignup} from '../../redux/actions/Auth';
-import {useForm} from 'react-hook-form';
+import React, { useState } from "react";
+import "./style.css";
+import { login } from "../../utils";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthSignup } from "../../redux/actions/Auth";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
-  const {register, handleSubmit, watch, errors} = useForm();
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  // const { register, handleSubmit, watch, errors } = useForm();
 
   const dispatch = useDispatch();
   let location = useLocation();
   let history = useHistory();
-  const onSubmit = (data) => {
-    dispatch(AuthSignup(data, history));
+  const onSubmit = (e) => {
+    e.preventDefault(e);
+    dispatch(
+      AuthSignup(
+        { first_name: username, email: email, password: password },
+        history
+      )
+    );
   };
 
   return (
@@ -51,27 +60,23 @@ const Signup = () => {
               that for you!
             </p>
             <div>
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={(e) => onSubmit(e)}>
                 <div className="input-container mt-5">
                   <label className="d-flex w-100">
                     <input
                       placeholder="Enter your name"
                       type="text"
-                      name="first_name"
-                      ref={register({
-                        required: 'Required',
-                        pattern: {
-                          required: true,
-                        },
-                      })}
+                      name="username"
+                      onChange={(e) => setUsername(e.target.value)}
                       className="txtuser"
+                      value={username}
                     />
                   </label>
-                  {errors.first_name && (
+                  {/* {errors.first_name && (
                     <span className="text-danger small text-center m-0">
                       This field is required
                     </span>
-                  )}
+                  )} */}
                 </div>
                 <div className="input-container mt-5">
                   <label htmlFor="email" className="d-flex w-100">
@@ -79,39 +84,34 @@ const Signup = () => {
                       placeholder="Enter your email"
                       type="text"
                       name="email"
-                      ref={register({
-                        required: true,
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        },
-                      })}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="txtmail"
+                      value={email}
                     />
                   </label>
-                  {errors.email && (
+                  {/* {errors.email && (
                     <span className="text-danger small text-center m-0">
                       This field is required
                     </span>
-                  )}
+                  )} */}
                 </div>
 
                 <div className="input-container mt-5">
                   <label className="d-flex w-100">
                     <input
                       placeholder="Enter your password"
-                      type="text"
+                      type="password"
                       name="password"
-                      ref={register({
-                        required: true,
-                      })}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="txtpass"
+                      value={password}
                     />
                   </label>
-                  {errors.password && (
+                  {/* {errors.password && (
                     <span className="text-danger small text-center m-0">
                       This field is required
                     </span>
-                  )}
+                  )} */}
                 </div>
                 <button
                   className="btn btn-login shadow-sm w-100 py-2 font-weight-bold"

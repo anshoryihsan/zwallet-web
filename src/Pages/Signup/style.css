@@ -68,7 +68,7 @@
   border-radius: 8px;
   height: 39px;
   width: 346px;
-  background: url(/assets/img/icon/user_.svg) no-repeat left center;
+  background: url(/assets/img/icon/user.svg) no-repeat left center;
   /* background-color: rgba(58, 61, 66, 0.1); */
   color: var(--color-primary);
   padding-left: 30px;
