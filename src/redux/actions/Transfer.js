@@ -14,9 +14,6 @@ const TransferFilter = (data) => {
 };
 
 export const Transfer = (token, data, history) => (dispatch) => {
-  // console.log(token);
-  // console.log(data);
-  // console.log(history);
   dispatch(TransferRequest());
   axios
     .patch("/transfer", data, { headers: { token: `${token}` } })

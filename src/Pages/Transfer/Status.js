@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroller";
 import "./transfer.css";
 import { Header, Footer } from "../../Components";
-import { TextBlock } from "react-placeholder/lib/placeholders";
 import { IMAGE_URL } from "../../Helper/Environment";
 import { useSelector, useDispatch } from "react-redux";
 import { AuthLogout } from "../../redux/actions/Auth";
-import { UserTransactionHistory } from "../../redux/actions/User";
+import { UserData, UserTransactionHistory } from "../../redux/actions/User";
 import { DateTime } from "luxon";
 
 function Amountbank() {
@@ -29,7 +27,7 @@ function Amountbank() {
   };
   const onClick = () => {
     history.push("/home");
-    // dispatch(UserTransactionHistory(token));
+    dispatch(UserData(token));
   };
   return (
     <>
