@@ -6,36 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthLogin } from "../../redux/actions/Auth";
 
 const Login = () => {
-  // console.log(props, "lembur");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = useState(false);
-  // const { loading } = useSelector((state) => state.Auth);
   const history = useHistory();
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.Auth);
-  // console.log(error, 'error');
   const onSubmit = (e) => {
     e.preventDefault(e);
     setLoading(true);
     dispatch(AuthLogin({ email, password }, history));
     setLoading(false);
-    // console.log(data);
-    // login(data);
-    // dispatch(
-    //   AuthLogin({
-    //     email: email,
-    //     password: password,
-    //     history: props.history,
-    //   })
-    // );
   };
-  // let location = useLocation();
-  // let history = useHistory();
   return (
     <main className="container-fluid d-flex">
       <article className="row">
-        {/* <Content /> */}
         <section className="col-sm-7 px-5 bg pb-5">
           <div className="mx-5 px-6 pt-4 pb-5">
             <p className="h3 color-p">Zwallet</p>
@@ -68,8 +53,6 @@ const Login = () => {
               that for you!
             </p>
             <div>
-              {/* <form action="/home/home.html"> */}
-              {/* <form onSubmit={() => login()}> */}
               <form onSubmit={(e) => onSubmit(e)}>
                 <div className="input-container mt-5">
                   <label htmlFor="email" className="d-flex w-100">

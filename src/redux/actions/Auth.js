@@ -14,6 +14,7 @@ export const AuthLogin = (data, history) => (dispatch) => {
   axios
     .post("/auth/login", data)
     .then((res) => {
+      // console.log(res);
       if (res.data.success) {
         dispatch(authSuccess(res.data.data));
         // if (res.data.data.role !== 24) return history.push('/home');
@@ -24,6 +25,7 @@ export const AuthLogin = (data, history) => (dispatch) => {
       }
     })
     .catch((err) => {
+      // console.log(err);
       dispatch(authError(err.data));
     });
 };

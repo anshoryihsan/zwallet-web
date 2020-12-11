@@ -41,7 +41,7 @@ export const UserData = (token) => (dispatch) => {
   axios
     .get("/profile/tokenId", { headers: { token: `${token}` } })
     .then((res) => {
-      //   console.log(res.data, 'userrr data');
+      console.log(res.data, "userrr data");
       if (res.data.success) {
         dispatch(userData(res.data.data[0]));
       } else {
@@ -49,7 +49,7 @@ export const UserData = (token) => (dispatch) => {
       }
     })
     .catch((err) => {
-      //   console.log(err);
+      console.log(err);
       dispatch(statusError(err.data.data));
     });
 };
@@ -58,7 +58,7 @@ export const UserTransactionHistory = (token) => (dispatch) => {
   axios
     .get("/transfer", { headers: { token: `${token}` } })
     .then((res) => {
-      //   console.log(res.data.data, 'transaction history');
+      // console.log(res.data.data, "transaction history");
       if (res.data.success) {
         dispatch(userDataTransactionHistory(res.data.data));
       } else {
@@ -66,8 +66,8 @@ export const UserTransactionHistory = (token) => (dispatch) => {
       }
     })
     .catch((err) => {
-      //   console.log(err);
-      dispatch(statusError(err.data.data));
+      // console.log(err);
+      dispatch(statusError(err));
     });
 };
 

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import "./home.css";
 import { AuthLogout } from "../../redux/actions/Auth";
 import { Header, Footer, Nav } from "../../Components";
-import { SOCKET_URL, IMAGE_URL } from "../../Helper/Environment";
-import ioClient from "socket.io-client";
+import { IMAGE_URL } from "../../Helper/Environment";
+import BarChart from "../../Components/Charts/BarChart";
 
 import { UserData, UserTransactionHistory } from "../../redux/actions/User.js";
 
@@ -14,34 +14,15 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.Auth);
-  const { userdata } = useSelector((state) => state.User);
   const { userdatahistory } = useSelector((state) => state.User);
-  const { id } = userdata;
-  // const [balance_, setBalance_] = useState(() || 0);
+  // const [id_, idSet_] = useState("");
 
   useEffect(() => {
     dispatch(UserTransactionHistory(token));
     dispatch(UserData(token));
+    // idSet_(userdata.id);
   }, [dispatch, token]);
-  // console.log(userdata, 'user data home');
-
-  const socket = ioClient(SOCKET_URL, {
-    query: { id },
-    transports: ["websocket"],
-    // transports: ["websocket", "polling", "flashsocket"], //cors
-  });
-  useEffect(() => {
-    if (socket == null) return;
-    socket.on("info_balance", (data) => {
-      const { balance } = data[0];
-      // setBalance_(balance);
-      // dispatch(UserData(token));
-    });
-    return () => {
-      // socket.close();
-      socket.off("info_balance");
-    };
-  }, [socket]);
+  const { userdata } = useSelector((state) => state.User);
 
   const onLogout = () => {
     dispatch(AuthLogout());
@@ -121,7 +102,11 @@ const Content = (props) => {
 };
 
 const Chart = () => {
-  return <aside className="col-lg-8 bg-color-white shadow-sm">Ichart</aside>;
+  return (
+    <aside className="col-lg-8 bg-color-white shadow-sm">
+      <BarChart />
+    </aside>
+  );
 };
 
 const TransactonHistory = (props) => {
