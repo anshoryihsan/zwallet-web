@@ -6,8 +6,8 @@ const authSuccess = (data) => {
 const authError = (error) => {
   return { type: "AUTH_ERROR", payload: error };
 };
-const authLogout = (error) => {
-  return { type: "LOGOUT", payload: error };
+const authLogout = () => {
+  return { type: "LOGOUT" };
 };
 
 export const AuthLogin = (data, history) => (dispatch) => {
@@ -46,6 +46,6 @@ export const AuthSignup = (data, history) => (dispatch) => {
 };
 
 export const AuthLogout = (history) => (dispatch) => {
-  dispatch(authLogout(undefined));
+  dispatch(authLogout());
   //   return history.push('/');
 };

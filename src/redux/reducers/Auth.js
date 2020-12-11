@@ -1,38 +1,38 @@
 const initialState = {
   // data: [],
   // loading: false,
-  token: '',
-  role: '',
-  error: '',
+  token: "",
+  role: "",
+  error: "",
 };
 
 const Auth = (state = initialState, action) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
   switch (type) {
     // case 'LOGIN_REQUEST':
     //   return {
     //     ...state,
     //     loading: true,
     //   };
-    case 'AUTH_SUCCESS':
-      const {token, role} = payload;
+    case "AUTH_SUCCESS":
+      const { token, role } = payload;
       return {
         ...state,
         token,
         role,
         error: undefined,
       };
-    case 'AUTH_ERROR':
+    case "AUTH_ERROR":
       return {
         ...state,
         error: payload,
       };
-    case 'LOGOUT':
+    case "LOGOUT":
       return {
         ...state,
-        token: payload,
-        role: payload,
-        error: payload,
+        token: "",
+        role: "",
+        error: "",
       };
     // case 'SIGNUP_REQUEST':
     //   return {

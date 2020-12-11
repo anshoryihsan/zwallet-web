@@ -99,7 +99,7 @@ body {
 
 .input-container-bordered:hover>label .i-search,
 .input-container-bordered:focus-within>label .i-search {
-  background-image: url(/assets/images/icons/search-active.svg);
+  background-image: url(/assets/img/icons/search-active.svg);
   height: 24px;
   width: 28px;
   background-size: cover;

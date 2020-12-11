@@ -12,6 +12,9 @@ const TransferHistory = (data) => {
 const TransferFilter = (data) => {
   return { type: "TRANSFER_FILTER", payload: data };
 };
+const terminatedata = () => {
+  return { type: "LOGOUT" };
+};
 
 export const Transfer = (token, data, history) => (dispatch) => {
   dispatch(TransferRequest());
@@ -35,7 +38,6 @@ export const HistoryTransfer = (token, page = 0) => (dispatch) => {
   axios
     .get(`/transfer?limit=4&page=${page}`, { headers: { token: `${token}` } })
     .then((res) => {
-      // console.log(res, 'ini reshistory');
       if (res.data.success) {
         return dispatch(TransferHistory(res.data.data));
       } else {
@@ -50,10 +52,6 @@ export const HistoryTransfer = (token, page = 0) => (dispatch) => {
 export const FilterHistory = (token, dateStart, dateEnd, filter) => (
   dispatch
 ) => {
-  console.log(filter);
-  console.log(dateStart);
-  console.log(dateEnd);
-  // dispatch(TransferRequest());
   axios
     .post(
       `/transfer/filter?start=${dateStart}&end=${dateEnd}&filter=${filter}`,
@@ -63,18 +61,16 @@ export const FilterHistory = (token, dateStart, dateEnd, filter) => (
       }
     )
     .then((res) => {
-      // console.log(res.data);
       if (res.data.success) {
-        // console.log(res.data, 'ini reshistory');
         return dispatch(TransferFilter(res.data.data));
       } else {
-        // console.log(res.data, 'ini reshistory');
         return dispatch(TransferFilter(res.data.success));
       }
     })
     .catch((err) => {
-      // console.log(res.data, 'ini reshistory');
-      // console.log(err, 'error');
       return dispatch(TransferFilter(err.data.success));
     });
+};
+export const TerminateData = () => (dispatch) => {
+  dispatch(terminatedata());
 };

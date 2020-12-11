@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
+import "./style.css";
 import { login } from "../../utils";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

@@ -76,6 +76,21 @@ const User = (state = initialState, action) => {
         ...state,
         error: payload,
       };
+    //
+    case "LOGOUT":
+      return {
+        ...state,
+        userdata: {},
+        userdatahistory: [],
+        getalluserdata: [],
+        insertuserdata: {},
+        userdatatransaction: {},
+
+        success: false,
+        message: "",
+        loading: false,
+        error: "",
+      };
     default:
       return state;
   }

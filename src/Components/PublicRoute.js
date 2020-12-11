@@ -1,6 +1,6 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-import {Route, Redirect} from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Route, Redirect } from "react-router-dom";
 // import { isLogin, loginAs } from "../utils";
 // import { loginAs } from "../utils";
 
@@ -26,16 +26,17 @@ import {Route, Redirect} from 'react-router-dom';
 //   );
 // }
 
-const PublicRoute = ({component: Component, restricted, ...rest}) => {
+const PublicRoute = ({ component: Component, restricted, ...rest }) => {
   // restricted (true) = public route itu bisa diakses ga sih ketika user tidak ada token/belum login
   // restricted (false) = public
-  const {token, role} = useSelector((state) => state.Auth);
+  const { userdata } = useSelector((state) => state.User);
+  const { token, role } = useSelector((state) => state.Auth);
   return (
     <Route
       {...rest}
       render={(props) =>
-        token && restricted ? (
-          <Redirect to={role === 24 ? '/admin' : '/home'} />
+        token && restricted && userdata ? (
+          <Redirect to={role === 24 ? "/admin" : "/home"} />
         ) : (
           <Component {...props} />
         )

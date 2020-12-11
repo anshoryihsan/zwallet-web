@@ -33,6 +33,9 @@ const userDataTransaction = (data) => {
 const statusError = (error) => {
   return { type: "STATUS_ERROR", payload: error };
 };
+const terminatedata = () => {
+  return { type: "LOGOUT" };
+};
 
 export const UserData = (token) => (dispatch) => {
   axios
@@ -214,4 +217,7 @@ export const InsertUserData = (token, data) => (dispatch) => {
       //   console.log(err);
       dispatch(statusError(err.data.data));
     });
+};
+export const TerminateData = () => (dispatch) => {
+  dispatch(terminatedata());
 };
