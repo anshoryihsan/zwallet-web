@@ -10,13 +10,8 @@ Zwallet adalah sebuah aplikasi dompet digital. dimana user dapat menyimpan uang 
 
 #### ScreenShots
 
-
-![alt text](/public/assets/img/zwallet/zwallet-web-dashboard.png?raw=true "dasboard")
-
-<div align="center">
-	<img width="250" src"/public/assets/img/zwallet/zwallet-web-login.png"/>
-    <img width="250" src"https://github.com/anshoryihsan/zwallet-web/blob/master/public/assets/img/zwallet/zwallet-web-dashboard.png"/>
-    <img width="250" src"public/assets/img/zwallet/zwallet-web-search-reciver.png" alt="search reciver"/>
-</div>
+![alt text](/public/assets/img/zwallet/zwallet-web-login.png?raw=true =250x "dasboard")
+![alt text](/public/assets/img/zwallet/zwallet-web-dashboard.png?raw=true =250x "dasboard")
+![alt text](/public/assets/img/zwallet/zwallet-web-search-reciver.png?raw=true =250x "dasboard")
 
 <h5 align="center"><a href="#">demo</a></h5>
