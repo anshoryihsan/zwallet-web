@@ -1,4 +1,4 @@
-<h1 align="center"><a href="http://3.92.180.73:8000">Zwallet</a></h1>
+<h1 align="center"><a href="http://3.92.180.73:8000">Zwallet-web</a></h1>
 
 Zwallet adalah sebuah aplikasi dompet digital. dimana user dapat menyimpan uang digital sebagai alat transaksi. apliksi ini adalah versi website yang dibuat dengan [npm](https://www.example.com/my%20great%20page), [React js](https://www.example.com/my%20great%20page) dan [React Bootstrap](https://www.example.com/my%20great%20page).
 
